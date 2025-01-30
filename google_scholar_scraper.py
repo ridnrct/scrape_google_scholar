@@ -46,7 +46,8 @@ def scrape_google_scholar(keyword, start_year, end_year, num_results):
                 citation_elements = article.find_all('a', href=True)
                 for elem in citation_elements:
                     if 'cites=' in elem['href']:
-                        citation = elem.text.strip()
+                        citation_text = elem.text.strip()
+                        citation = re.sub(r'\D', '', citation_text) 
                         break
                 if citation == "Citation not available":
                     citation = "Citation not found"
