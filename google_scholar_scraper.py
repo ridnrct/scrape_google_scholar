@@ -36,41 +36,41 @@ def scrape_google_scholar(keyword, start_year, end_year, num_results):
             try:
                 title = article.find('h3', {'class': 'gs_rt'}).text
             except:
-                title = "Tidak ada judul"
+                title = "No title"
             try:
                 link = article.find('h3', {'class': 'gs_rt'}).find('a')['href']
             except:
-                link = "Link tidak tersedia"
+                link = "Link not available"
             try:
-                citation = "Sitasi tidak tersedia"
+                citation = "Citation not available"
                 citation_elements = article.find_all('a', href=True)
                 for elem in citation_elements:
                     if 'cites=' in elem['href']:
                         citation = elem.text.strip()
                         break
-                if citation == "Sitasi tidak tersedia":
-                    citation = "Sitasi tidak ditemukan"
+                if citation == "Citation not available":
+                    citation = "Citation not found"
             except Exception as e:
-                citation = f"Error dalam pengambilan sitasi: {str(e)}"
+                citation = f"Error in fetching citation: {str(e)}"
             try:
                 snippet = article.find('div', {'class': 'gs_rs'}).text
             except:
-                snippet = "Deskripsi tidak tersedia"
+                snippet = "Description not available"
             try:
                 authors_year = article.find('div', {'class': 'gs_a'}).text
                 authors = re.split(' - ', authors_year)[0]
                 year = re.search(r'\d{4}', authors_year).group()
             except:
-                authors = "Penulis tidak tersedia"
-                year = "Tahun tidak tersedia"
+                authors = "Authors not available"
+                year = "Year not available"
             
             article_data = {
-                'Judul Jurnal': title,
-                'Penulis': authors,
-                'Tahun Publikasi': year,
-                'Abstrak': snippet,
+                'Journal Title': title,
+                'Authors': authors,
+                'Publication Year': year,
+                'Abstract': snippet,
                 'DOI/URL': link,
-                'Jumlah Sitasi': citation
+                'Citation Count': citation
             }
             article_list.append(article_data)
         start += 10  
@@ -84,25 +84,25 @@ def save_to_excel(data, keyword):
     df.to_excel(filename, index=False, engine='openpyxl')
 
 def main():
-    keyword = input("Masukkan Kata Kunci Pencarian Artikel: ")
-    start_year = int(input("Masukkan Tahun Awal (cth. 2020): "))
-    end_year = int(input("Masukkan Tahun Akhir (cth. 2025): "))
-    num_results = int(input("Masukkan Jumlah Artikel: "))
+    keyword = input("Enter search keyword for articles: ")
+    start_year = int(input("Enter start year (e.g., 2020): "))
+    end_year = int(input("Enter end year (e.g., 2025): "))
+    num_results = int(input("Enter number of articles: "))
     articles = scrape_google_scholar(keyword, start_year, end_year, num_results)
     if articles:
-        print("\nDaftar Artikel:")
+        print("\nList of Articles:")
         for i, article in enumerate(articles, start=1):
-            print(f"\nArtikel {i}:")
-            print(f"Judul: {article['Judul Jurnal']}")
-            print(f"Penulis: {article['Penulis']}")
-            print(f"Tahun Publikasi: {article['Tahun Publikasi']}")
+            print(f"\nArticle {i}:")
+            print(f"Title: {article['Journal Title']}")
+            print(f"Authors: {article['Authors']}")
+            print(f"Publication Year: {article['Publication Year']}")
             print(f"DOI/URL: {article['DOI/URL']}")
-            print(f"Jumlah Sitasi: {article['Jumlah Sitasi']}")
-            print(f"Abstrak: {article['Abstrak']}")
+            print(f"Citation Count: {article['Citation Count']}")
+            print(f"Abstract: {article['Abstract']}")
         save_to_excel(articles, keyword)
-        print(f"\nData berhasil disimpan ke dalam file {keyword}.xlsx.")
+        print(f"\nData successfully saved to the file {keyword}.xlsx.")
     else:
-        print("Tidak ada artikel yang ditemukan.")
+        print("No articles found.")
 
 if __name__ == '__main__':
     main()
