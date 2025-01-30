@@ -1,56 +1,55 @@
 # Google Scholar Scraper
 
-Google Scholar Scraper merupakan program Python yang digunakan untuk mencari dan mengambil data artikel dari Google Scholar berdasarkan kata kunci, rentang tahun, dan jumlah artikel yang diinginkan. Hasil pencarian akan ditampilkan di konsol dan disimpan dalam file Excel.
+Google Scholar Scraper is a Python program used to search for and retrieve article data from Google Scholar based on keywords, year range, and the desired number of articles. The search results will be displayed in the console and saved in an Excel file.
 
-## Persyaratan
-Pastikan Anda telah menginstal Python dan library berikut sebelum menjalankan program:
+## Requirements
+Ensure you have installed Python and the following libraries before running the program:
 
-- Selenium
-- BeautifulSoup4
-- Pandas
-- Webdriver-Manager
-- OpenPyxl
+- Selenium  
+- BeautifulSoup4  
+- Pandas  
+- Webdriver-Manager  
+- OpenPyxl  
 
-### Instalasi Library
+### Installing Libraries
 
-1. Install library secara manual menggunakan perintah:
+1. Manually install the required libraries using the following command:
    ```bash
    pip install selenium beautifulsoup4 pandas webdriver-manager openpyxl
    ```
 
-2. Alternatifnya, install semua library yang dibutuhkan dari file `requirements.txt` dengan perintah:
+2. Alternatively, install all required libraries from the `requirements.txt` file using:
    ```bash
    pip install -r requirements.txt
    ```
 
-## Cara Menjalankan Program
+## How to Run the Program
 
-1. Jalankan program dengan perintah:
+1. Run the program using the command:
    ```bash
    python google_scholar_scraper.py
    ```
 
-2. Program akan meminta Anda untuk memasukkan data berikut:
+2. The program will prompt you to enter the following details:
 
-   - **Kata Kunci**: Masukkan kata kunci pencarian artikel yang diinginkan.
-   - **Tahun Awal**: Masukkan tahun awal dari rentang pencarian.
-   - **Tahun Akhir**: Masukkan tahun akhir dari rentang pencarian.
-   - **Jumlah Artikel**: Masukkan jumlah artikel yang ingin diambil.
+   - **Keyword**: Enter the search keyword for the desired articles.  
+   - **Start Year**: Enter the starting year of the search range.  
+   - **End Year**: Enter the ending year of the search range.  
+   - **Number of Articles**: Enter the number of articles to retrieve.  
 
-3. Setelah data dimasukkan, program akan memproses pencarian artikel di Google Scholar.
+3. After entering the details, the program will process the article search on Google Scholar.
 
-## Hasil
+## Results
 
-- Artikel-artikel yang ditemukan akan ditampilkan di konsol.
-- Data artikel juga akan disimpan dalam file Excel dengan format nama file berdasarkan kata kunci pencarian.
+- The retrieved articles will be displayed in the console.  
+- The article data will also be saved in an Excel file, named according to the search keyword.
 
-## File Output
-File Excel hasil pencarian akan berisi kolom-kolom berikut:
+## Output File
+The resulting Excel file will contain the following columns:
 
-- **Judul Jurnal**: Judul artikel yang ditemukan.
-- **Penulis**: Nama penulis artikel.
-- **Tahun Publikasi**: Tahun terbit artikel.
-- **Abstrak**: Deskripsi atau ringkasan artikel.
-- **DOI/URL**: Link ke artikel.
-- **Jumlah Sitasi**: Informasi jumlah sitasi artikel (jika tersedia).
-
+- **Journal Title**: The title of the retrieved article.  
+- **Authors**: The names of the article's authors.  
+- **Publication Year**: The year the article was published.  
+- **Abstract**: A description or summary of the article.  
+- **DOI/URL**: A link to the article.  
+- **Citation Count**: The number of citations.
